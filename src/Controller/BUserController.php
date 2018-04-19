@@ -65,7 +65,7 @@ class BUserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        $redirectionUrl = $this->generateUrl('backoffice_api_user_get', ['id' => $user->getId()]);
+        $redirectionUrl = $this->generateUrl('cream_io_user.details', ['id' => $user->getId()]);
 
         return $this->apiService->successWithoutResultsRedirected($user->getId(), $request, Response::HTTP_CREATED, $redirectionUrl);
     }
