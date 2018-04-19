@@ -16,7 +16,7 @@
             <argument type="service" id="doctrine" />
         </service>
         <!-- CONTROLLERS -->
-        <service id="cream_io_user.controller.buser_controller" class="CreamIO\UserBundle\Controller\BUserController">
+        <service id="cream_io_user.controller.buser_controller" class="CreamIO\UserBundle\Controller\BUserController" public="true">
             <argument type="service" id="cream_io_user.apiservice" />
             <argument type="service" id="validator" />
         </service>
