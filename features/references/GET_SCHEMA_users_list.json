@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": [
+    "status",
+    "code",
+    "request-method",
+    "results-for",
+    "results"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "integer",
+      "required": true
+    },
+    "request-method": {
+      "type": "string",
+      "required": true
+    },
+    "results-for": {
+      "type": "string",
+      "required": true
+    },
+    "results": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "users": {
+          "type": "array",
+          "required": "true",
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

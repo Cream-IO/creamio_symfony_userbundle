@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": [
+    "status",
+    "code",
+    "type",
+    "reason",
+    "additional-informations"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "integer",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "reason": {
+      "type": "string",
+      "required": true
+    },
+    "additional-informations": {
+      "type": "object",
+      "required":true,
+      "minItems": 1,
+      "properties": {
+        "fields-validation-violations": {
+          "type": "object",
+          "required": true
+        }
+      }
+    }
+  }
+}
