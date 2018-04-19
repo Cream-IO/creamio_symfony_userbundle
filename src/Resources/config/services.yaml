@@ -1,8 +1,0 @@
-parameters:
-    user_bundle:
-        test1: 'test'
-        test2: 'test2'
-
-services:
-    CreamIO\UserBundle\APIService:
-        autowire: true
