@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="creamio_user")
+ * @ORM\Table(name="app_buser")
  * @ORM\Entity(repositoryClass="CreamIO\UserBundle\Repository\BUserRepository")
  * @UniqueEntity("email")
  * @UniqueEntity("username")

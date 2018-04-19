@@ -4,10 +4,26 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="cream_io_user.apiservice" class="CreamIO\UserBundle\Service\APIService" />
+        <!-- SERVICES -->
+        <service id="cream_io_user.apiservice" class="CreamIO\UserBundle\Service\APIService">
+            <argument type="service" id="security.user_password_encoder.generic" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
         <service id="CreamIO\UserBundle\Service\APIService" alias="cream_io_user.apiservice" />
-        <service class="CreamIO\UserBundle\Repository\BUserRepository">
+        <!-- REPOSITORIES -->
+        <service id="CreamIO\UserBundle\Repository\BUserRepository" public="false">
             <tag name="doctrine.repository_service" />
+            <argument type="service" id="doctrine" />
+        </service>
+        <!-- CONTROLLERS -->
+        <service id="cream_io_user.controller.buser_controller" class="CreamIO\UserBundle\Controller\BUserController">
+            <argument type="service" id="cream_io_user.apiservice" />
+            <argument type="service" id="validator" />
+        </service>
+        <service id="CreamIO\UserBundle\Controller\BUserController" alias="cream_io_user.controller.buser_controller" public="true" />
+        <!-- EVENTSUBSCRIBERS -->
+        <service id="cream_io_user.event_subscriber.apiexception_subscriber" class="CreamIO\UserBundle\EventSubscriber\APIExceptionSubscriber">
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>
