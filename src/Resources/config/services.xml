@@ -6,5 +6,8 @@
     <services>
         <service id="cream_io_user.apiservice" class="CreamIO\UserBundle\Service\APIService" />
         <service id="CreamIO\UserBundle\Service\APIService" alias="cream_io_user.apiservice" />
+        <service class="CreamIO\UserBundle\Repository\BUserRepository">
+            <tag name="doctrine.repository_service" />
+        </service>
     </services>
 </container>
