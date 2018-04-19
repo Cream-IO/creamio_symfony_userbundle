@@ -4,10 +4,10 @@
         xsi:schemaLocation="http://symfony.com/schema/routing
         http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="cream_io_user.create" path="/admin/api/users" methods="POST" controller="cream_io_user.controller.buser_controller:create" />
-    <route id="cream_io_user.login" path="/admin/api/login" methods="POST" controller="cream_io_user.controller.buser_controller:login" />
-    <route id="cream_io_user.details_list" path="/admin/api/users" methods="GET" controller="cream_io_user.controller.buser_controller:detailsList" />
-    <route id="cream_io_user.details" path="/admin/api/users/{id}" methods="GET" controller="cream_io_user.controller.buser_controller:details" />
-    <route id="cream_io_user.delete" path="/admin/api/users/{id}" methods="DELETE" controller="cream_io_user.controller.buser_controller:delete" />
-    <route id="cream_io_user.patch" path="/admin/api/users/{id}" methods="PATCH" controller="cream_io_user.controller.buser_controller:patch" />
+    <route id="cream_io_user.create" path="/users" methods="POST" controller="cream_io_user.controller.buser_controller:create" />
+    <route id="cream_io_user.login" path="/login" methods="POST" controller="cream_io_user.controller.buser_controller:login" />
+    <route id="cream_io_user.details_list" path="/users" methods="GET" controller="cream_io_user.controller.buser_controller:detailsList" />
+    <route id="cream_io_user.details" path="/users/{id}" methods="GET" controller="cream_io_user.controller.buser_controller:details" />
+    <route id="cream_io_user.delete" path="/users/{id}" methods="DELETE" controller="cream_io_user.controller.buser_controller:delete" />
+    <route id="cream_io_user.patch" path="/users/{id}" methods="PATCH" controller="cream_io_user.controller.buser_controller:patch" />
 </routes>
