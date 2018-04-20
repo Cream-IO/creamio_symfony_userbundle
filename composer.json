@@ -1,7 +1,7 @@
 {
   "type": "symfony-bundle",
   "license": "proprietary",
-  "name": "qraimbault/symfony_creamio_userbundle",
+  "name": "qraimbault/creamio_symfony_userbundle",
   "description": "Simple API to manager users for CreamIO projects in symfony",
   "authors": [
     {
