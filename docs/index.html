@@ -1,0 +1,795 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#user-authentication-route" class="toc-h2 toc-link" data-title="user-authentication-route">User authentication route</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#user-management" class="toc-h1 toc-link" data-title="user-management">User management</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-specific-user" class="toc-h2 toc-link" data-title="create-a-specific-user">Create a Specific User</a>
+                  </li>
+                  <li>
+                    <a href="#retreive-specific-user-datas" class="toc-h2 toc-link" data-title="retreive-specific-user-datas">Retreive Specific User datas</a>
+                  </li>
+                  <li>
+                    <a href="#retreive-all-users-datas" class="toc-h2 toc-link" data-title="retreive-all-users-datas">Retreive All Users datas</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-specific-user" class="toc-h2 toc-link" data-title="delete-a-specific-user">Delete a Specific User</a>
+                  </li>
+                  <li>
+                    <a href="#patch-a-specific-user" class="toc-h2 toc-link" data-title="patch-a-specific-user">Patch a Specific User</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
+          </li>
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>This API is part of a user bundle for Symfony. It can be used to handle authentication to a backoffice, and manage users and permissions.</p>
+
+<p>It has been made to have a separation between backend application focusing on data management, and frontend application only doing API calls to interact with the backend application.</p>
+<h1 id='authentication'>Authentication</h1><h2 id='user-authentication-route'>User authentication route</h2>
+<blockquote>
+<p>Example payload:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MyUsername"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MyPassword"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint handles authentication by sending back PHPSESSID cookie.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://example.com/admin/api/login</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Username</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-status-code'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Invalid credentials</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+Remember — the authentication works only if the cookie is stored client-side.
+</aside>
+<h1 id='user-management'>User management</h1><h2 id='create-a-specific-user'>Create a Specific User</h2>
+<blockquote>
+<p>Example payload:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestUser"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"plain_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestPass"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@test.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ROLE_ADMIN"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Developer"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My beautiful description"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example return:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-ressource-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfb87adf-60ac-4027-a5be-6007f946791c"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint create a new user.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POSET http://example.com/admin/api/users</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Username</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>job</td>
+<td>Job&#39;s name</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>description</td>
+<td>User description</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>Permissions roles</td>
+<td>array</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>email</td>
+<td>E-mail address</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>First Name</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>Last Name</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>plain_password</td>
+<td>Plain password to encrypt</td>
+<td>string</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-status-code-2'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>OK - Created</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request - Content type is incorrect or value(s) are missing/incorrect</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The response "Location" header is set to the details (GET) route to created user details
+</aside>
+<h2 id='retreive-specific-user-datas'>Retreive Specific User datas</h2>
+<blockquote>
+<p>Example return:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7ac5d39-8c16-40ce-b7fb-dbbe62650a0d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7ac5d39-8c16-40ce-b7fb-dbbe62650a0d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ROLE_ADMIN"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixture@test.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Job"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test decription"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestUserName"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19-04-2018 04:23:11"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retreives a specific user datas. It does not require any payload.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://example.com/admin/api/users/&lt;ID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the user to find</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-status-code-3'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Invalid ID or non-existent user</td>
+</tr>
+</tbody></table>
+<h2 id='retreive-all-users-datas'>Retreive All Users datas</h2>
+<blockquote>
+<p>Example return:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results-for"</span><span class="p">:</span><span class="w"> </span><span class="s2">"users-list"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7ac5d39-8c16-40ce-b7fb-dbbe62650a0d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ROLE_ADMIN"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixture@test.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Job"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test decription"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestUserName"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19-04-2018 04:23:11"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sddzo74z-8c16-40ce-b7fb-dbbe62650a0d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ROLE_ADMIN"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test2@test.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Popol"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pwet"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Job"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test decription"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AutreTestIssou"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19-04-2018 04:23:11"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retreives all users datas. It does not require any payload.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET http://example.com/admin/api/users</code></p>
+<h3 id='http-response-status-code-4'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-specific-user'>Delete a Specific User</h2>
+<blockquote>
+<p>Example return:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DELETE"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-ressource-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ff04af9-8382-4792-ad03-95f1f09a5fd6"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a specific user. It does not require any payload.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE http://example.com/admin/api/users/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the user to delete</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-status-code-5'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Invalid ID or non-existent user</td>
+</tr>
+</tbody></table>
+<h2 id='patch-a-specific-user'>Patch a Specific User</h2>
+<blockquote>
+<p>Example payload:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MyNewUsername"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"plain_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MyNewPassword"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example return:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PATCH"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request-ressource-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7ac5d39-8c16-40ce-b7fb-dbbe62650a0d"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint patches a specific user datas, replacing the values by the provided ones, leaving the non provided variables as is.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>PATCH http://example.com/admin/api/users/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the user to patch</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Username</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>job</td>
+<td>Job&#39;s name</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>description</td>
+<td>User description</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>Permissions roles</td>
+<td>array</td>
+<td>No</td>
+</tr>
+<tr>
+<td>email</td>
+<td>E-mail address</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>First Name</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>Last Name</td>
+<td>string</td>
+<td>No</td>
+</tr>
+<tr>
+<td>plain_password</td>
+<td>Plain password to encrypt</td>
+<td>string</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-status-code-6'>HTTP Response Status Code</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Invalid ID or non-existent user</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<blockquote>
+<p>Bad method</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">405</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Method Not Allowed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No route found for </span><span class="se">\"</span><span class="s2">PUT /admin/api/users/c7ac5d39-8c16-40ce-b7fb-dbbe62650a0d</span><span class="se">\"</span><span class="s2">: Method Not Allowed (Allow: PATCH, GET, DELETE)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additional-informations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Invalid id on get request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid id, format must be uuid"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additional-informations"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Invalid payload datas on POST request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bad Request"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error while validating ressource insertion/update"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"additional-informations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"fields-validation-violations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This value is already used."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"plainPassword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password can't be blank"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email can't be blank"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Firstname can't be blank"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lastname can't be blank"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid, can be due to Content-Type header not set to application/json.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your session ID in cookies is wrong, re-authenticate.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- You are logged-in but your permissions are not sufficient for this request.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The requested resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a route with an invalid method.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+You can find some error examples on the right
+</aside>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
