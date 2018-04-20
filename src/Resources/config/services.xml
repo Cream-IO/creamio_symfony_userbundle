@@ -19,6 +19,7 @@
         <service id="cream_io_user.controller.buser_controller" class="CreamIO\UserBundle\Controller\BUserController" public="true">
             <argument type="service" id="cream_io_user.apiservice" />
             <argument type="service" id="validator" />
+            <argument type="service" id="cream_io_user.buserservice" />
         </service>
         <service id="CreamIO\UserBundle\Controller\BUserController" alias="cream_io_user.controller.buser_controller" public="true" />
     </services>
