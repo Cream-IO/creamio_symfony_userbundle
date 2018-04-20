@@ -2,7 +2,7 @@
 
 namespace CreamIO\UserBundle\Controller;
 
-use CreamIO\BaseBundle\Entity\BUser;
+use CreamIO\UserBundle\Entity\BUser;
 use CreamIO\BaseBundle\Exceptions\APIError;
 use CreamIO\BaseBundle\Service\APIService;
 use CreamIO\UserBundle\Service\BUserService;
