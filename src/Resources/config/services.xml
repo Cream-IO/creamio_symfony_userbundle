@@ -5,11 +5,11 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!-- SERVICES -->
-        <service id="cream_io_user.apiservice" class="CreamIO\UserBundle\Service\APIService">
+        <service id="cream_io_user.buserservice" class="CreamIO\UserBundle\Service\BUserService">
             <argument type="service" id="security.user_password_encoder.generic" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
-        <service id="CreamIO\UserBundle\Service\APIService" alias="cream_io_user.apiservice" />
+        <service id="CreamIO\UserBundle\Service\BUserService" alias="cream_io_user.buserservice" />
         <!-- REPOSITORIES -->
         <service id="CreamIO\UserBundle\Repository\BUserRepository" public="false">
             <tag name="doctrine.repository_service" />
@@ -21,9 +21,5 @@
             <argument type="service" id="validator" />
         </service>
         <service id="CreamIO\UserBundle\Controller\BUserController" alias="cream_io_user.controller.buser_controller" public="true" />
-        <!-- EVENTSUBSCRIBERS -->
-        <service id="cream_io_user.event_subscriber.apiexception_subscriber" class="CreamIO\UserBundle\EventSubscriber\APIExceptionSubscriber">
-            <tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

@@ -2,9 +2,10 @@
 
 namespace CreamIO\UserBundle\Controller;
 
-use CreamIO\UserBundle\Entity\BUser;
-use CreamIO\UserBundle\Exceptions\APIError;
-use CreamIO\UserBundle\Service\APIService;
+use CreamIO\BaseBundle\Entity\BUser;
+use CreamIO\BaseBundle\Exceptions\APIError;
+use CreamIO\BaseBundle\Service\APIService;
+use CreamIO\UserBundle\Service\BUserService;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,6 +29,7 @@ class BUserController extends Controller
 
     private $apiService;
     private $validator;
+    private $BUserService;
 
     /**
      * BUserController constructor.
@@ -35,10 +37,11 @@ class BUserController extends Controller
      * @param APIService         $APIService Injected API service
      * @param ValidatorInterface $validator  Injected Validator service
      */
-    public function __construct(APIService $APIService, ValidatorInterface $validator)
+    public function __construct(APIService $APIService, ValidatorInterface $validator, BUserService $BUserService)
     {
         $this->apiService = $APIService;
         $this->validator = $validator;
+        $this->BUserService = $BUserService;
     }
 
     /**
@@ -56,7 +59,7 @@ class BUserController extends Controller
             throw $this->apiService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
         }
         $datas = $request->getContent();
-        $user = $this->apiService->generateAppUserFromJSON($datas);
+        $user = $this->BUserService->generateAppUserFromJSON($datas);
         $validationErrors = $this->validator->validate($user);
         $user->eraseCredentials();
         if (count($validationErrors) > 0) {
@@ -93,7 +96,7 @@ class BUserController extends Controller
             throw $this->apiService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
         }
         $datas = $request->getContent();
-        $user = $this->apiService->mergeEntityFromJSON($user, $datas);
+        $user = $this->BUserService->mergeEntityFromJSON($user, $datas);
         $validationErrors = $this->validator->validate($user);
         if (count($validationErrors) > 0) {
             throw $this->apiService->postError($validationErrors);

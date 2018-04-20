@@ -20,7 +20,8 @@
     "symfony/framework-bundle": "^4.0",
     "symfony/orm-pack": "^1.0",
     "symfony/security-bundle": "^4.0",
-    "symfony/validator": "^4.0"
+    "symfony/validator": "^4.0",
+    "qraimbault/creamio_symfony_basebundle": "^0"
   },
   "require-dev": {
     "behat/behat": "^3.4",
