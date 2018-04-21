@@ -1,4 +1,6 @@
 Used libraries in this bundle :
 
 ramsey/uuid-doctrine by ramsey : https://github.com/ramsey - UNDER MIT LICENSE
-gbprod/uuid-normalizer by gbprod : https://github.com/gbprod/uuid-normalizer - UNDER WTFPL
+gbprod/uuid-normalizer by gbprod : https://github.com/gbprod - UNDER WTFPL
+
+Third-party libraries licenses are included in their dependency directory.
