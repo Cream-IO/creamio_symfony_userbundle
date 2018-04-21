@@ -6,7 +6,6 @@ use CreamIO\UserBundle\Entity\BUser;
 use GBProd\UuidNormalizer\UuidNormalizer;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -44,7 +43,7 @@ class BUserService
      */
     public function generateSerializer(): Serializer
     {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $encoders = [new JsonEncoder()];
         $objectNormalizer = new ObjectNormalizer();
         $objectNormalizer->setIgnoredAttributes(['password', 'salt', 'passwordLegal', 'plainPassword']);
         $normalizers = [new DateTimeNormalizer('d-m-Y H:i:s', new \DateTimeZone('Europe/Paris')), $objectNormalizer, new UuidNormalizer()];

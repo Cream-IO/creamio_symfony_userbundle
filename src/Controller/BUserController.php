@@ -31,6 +31,7 @@ class BUserController extends Controller
     private $apiService;
     private $validator;
     private $BUserService;
+    private $serializer;
 
     /**
      * BUserController constructor.
@@ -44,6 +45,7 @@ class BUserController extends Controller
         $this->apiService = $APIService;
         $this->validator = $validator;
         $this->BUserService = $BUserService;
+        $this->serializer = $BUserService->generateSerializer();
     }
 
     /**
@@ -138,7 +140,7 @@ class BUserController extends Controller
             throw $this->apiService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
         }
 
-        return $this->apiService->successWithResults(['user' => $user], Response::HTTP_OK, $user->getId(), $request);
+        return $this->apiService->successWithResults(['user' => $user], Response::HTTP_OK, $user->getId(), $request, $this->serializer);
     }
 
     /**
@@ -187,7 +189,7 @@ class BUserController extends Controller
         $repo = $em->getRepository(BUser::class);
         $usersList = $repo->findAll();
 
-        return $this->apiService->successWithResults(['users' => $usersList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request);
+        return $this->apiService->successWithResults(['users' => $usersList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request, $this->serializer);
     }
 
     /**
