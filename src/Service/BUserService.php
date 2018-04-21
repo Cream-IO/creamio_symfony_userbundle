@@ -3,21 +3,13 @@
 namespace CreamIO\UserBundle\Service;
 
 use CreamIO\UserBundle\Entity\BUser;
-use CreamIO\BaseBundle\Exceptions\APIError;
-use CreamIO\BaseBundle\Exceptions\APIException;
-use Doctrine\ORM\EntityManagerInterface;
 use GBProd\UuidNormalizer\UuidNormalizer;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * Handles all logical operations related to the API activites.
@@ -34,20 +26,13 @@ class BUserService
     private $passwordEncoder;
 
     /**
-     * @var EntityManagerInterface Autowired Doctrine service
-     */
-    private $em;
-
-    /**
      * APIService constructor.
      *
      * @param UserPasswordEncoderInterface $passwordEncoder Autowired UserPasswordEncoder service
-     * @param EntityManagerInterface       $entityManager   Autowired Doctrine service
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
-        $this->em = $entityManager;
     }
 
     /**
@@ -63,9 +48,8 @@ class BUserService
         $objectNormalizer = new ObjectNormalizer();
         $objectNormalizer->setIgnoredAttributes(['password', 'salt', 'passwordLegal', 'plainPassword']);
         $normalizers = [new DateTimeNormalizer('d-m-Y H:i:s', new \DateTimeZone('Europe/Paris')), $objectNormalizer, new UuidNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer;
+        return new Serializer($normalizers, $encoders);
     }
 
     /**

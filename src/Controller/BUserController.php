@@ -2,16 +2,17 @@
 
 namespace CreamIO\UserBundle\Controller;
 
-use CreamIO\UserBundle\Entity\BUser;
 use CreamIO\BaseBundle\Exceptions\APIError;
+use CreamIO\BaseBundle\Exceptions\APIException;
 use CreamIO\BaseBundle\Service\APIService;
+use CreamIO\UserBundle\Entity\BUser;
 use CreamIO\UserBundle\Service\BUserService;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route as Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -23,9 +24,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class BUserController extends Controller
 {
-    const ACCEPTED_CONTENT_TYPE = 'application/json';
-    const LIST_RESULTS_FOR_IDENTIFIER = 'users-list';
-    const LOGIN_RESULTS_FOR_IDENTIFIER = 'login';
+    private const ACCEPTED_CONTENT_TYPE = 'application/json';
+    private const LIST_RESULTS_FOR_IDENTIFIER = 'users-list';
+    private const LOGIN_RESULTS_FOR_IDENTIFIER = 'login';
 
     private $apiService;
     private $validator;
@@ -34,8 +35,9 @@ class BUserController extends Controller
     /**
      * BUserController constructor.
      *
-     * @param APIService         $APIService Injected API service
-     * @param ValidatorInterface $validator  Injected Validator service
+     * @param APIService         $APIService   Injected API service
+     * @param ValidatorInterface $validator    Injected Validator service
+     * @param BUserService       $BUserService Injected User service
      */
     public function __construct(APIService $APIService, ValidatorInterface $validator, BUserService $BUserService)
     {
@@ -49,20 +51,23 @@ class BUserController extends Controller
      *
      * @Route("/users", name="user_post", methods="POST")
      *
-     * @param Request            $request    Handled HTTP request
+     * @param Request $request Handled HTTP request
+     *
+     * @throws \LogicException
+     * @throws APIException
      *
      * @return Response
      */
     public function create(Request $request): Response
     {
-        if (SELF::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
+        if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
             throw $this->apiService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
         }
         $datas = $request->getContent();
         $user = $this->BUserService->generateAppUserFromJSON($datas);
         $validationErrors = $this->validator->validate($user);
         $user->eraseCredentials();
-        if (count($validationErrors) > 0) {
+        if (\count($validationErrors) > 0) {
             throw $this->apiService->postError($validationErrors);
         }
         $em = $this->getDoctrine()->getManager();
@@ -78,14 +83,17 @@ class BUserController extends Controller
      *
      * @Route("/users/{id}", name="user_patch", methods="PATCH")
      *
-     * @param Request            $request    Handled HTTP request
-     * @param string             $id         User id to patch
+     * @param Request $request Handled HTTP request
+     * @param string  $id      User id to patch
+     *
+     * @throws \LogicException
+     * @throws APIException
      *
      * @return Response
      */
     public function patch(Request $request, string $id): Response
     {
-        if (SELF::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
+        if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
             throw $this->apiService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
         }
         if (!Uuid::isValid($id)) {
@@ -98,7 +106,7 @@ class BUserController extends Controller
         $datas = $request->getContent();
         $user = $this->BUserService->mergeEntityFromJSON($user, $datas);
         $validationErrors = $this->validator->validate($user);
-        if (count($validationErrors) > 0) {
+        if (\count($validationErrors) > 0) {
             throw $this->apiService->postError($validationErrors);
         }
         $user->eraseCredentials();
@@ -112,8 +120,11 @@ class BUserController extends Controller
      *
      * @Route("/users/{id}", name="user_get", methods="GET")
      *
-     * @param Request    $request    The handled HTTP request
-     * @param string     $id         User id to get information for
+     * @param Request $request The handled HTTP request
+     * @param string  $id      User id to get information for
+     *
+     * @throws \LogicException
+     * @throws APIException
      *
      * @return JsonResponse
      */
@@ -135,8 +146,11 @@ class BUserController extends Controller
      *
      * @Route("/users/{id}", name="user_delete", methods="DELETE")
      *
-     * @param Request    $request    The handled HTTP request
-     * @param string     $id         User id to delete
+     * @param Request $request The handled HTTP request
+     * @param string  $id      User id to delete
+     *
+     * @throws \LogicException
+     * @throws APIException
      *
      * @return JsonResponse
      */
@@ -161,7 +175,9 @@ class BUserController extends Controller
      *
      * @Route("/users", name="user_list_get", methods="GET")
      *
-     * @param Request    $request    Handled HTTP request
+     * @param Request $request Handled HTTP request
+     *
+     * @throws \LogicException
      *
      * @return JsonResponse
      */
@@ -171,7 +187,7 @@ class BUserController extends Controller
         $repo = $em->getRepository(BUser::class);
         $usersList = $repo->findAll();
 
-        return $this->apiService->successWithResults(['users' => $usersList], Response::HTTP_OK, SELF::LIST_RESULTS_FOR_IDENTIFIER, $request);
+        return $this->apiService->successWithResults(['users' => $usersList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request);
     }
 
     /**
@@ -179,12 +195,12 @@ class BUserController extends Controller
      *
      * @Route("/login", name="login", methods={"POST"})
      *
-     * @param Request    $request    Handled HTTP request
+     * @param Request $request Handled HTTP request
      *
      * @return JsonResponse
      */
     public function login(Request $request): Response
     {
-        return $this->apiService->successWithoutResults(SELF::LOGIN_RESULTS_FOR_IDENTIFIER, Response::HTTP_OK, $request);
+        return $this->apiService->successWithoutResults(self::LOGIN_RESULTS_FOR_IDENTIFIER, Response::HTTP_OK, $request);
     }
 }
