@@ -69,6 +69,14 @@ class BUserService
         return $user;
     }
 
+    /**
+     * Used in patch method to update an existing user
+     *
+     * @param BUser $user   User to update
+     * @param string $datas JSON string with patch datas
+     *
+     * @return BUser
+     */
     public function mergeEntityFromJSON(BUser $user, string $datas): BUser
     {
         $this->generateSerializer()->deserialize($datas, BUser::class, 'json', ['object_to_populate' => $user]);

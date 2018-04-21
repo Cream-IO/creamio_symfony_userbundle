@@ -28,9 +28,24 @@ class BUserController extends Controller
     private const LIST_RESULTS_FOR_IDENTIFIER = 'users-list';
     private const LOGIN_RESULTS_FOR_IDENTIFIER = 'login';
 
+    /**
+     * @var APIService Injected API service
+     */
     private $apiService;
+
+    /**
+     * @var ValidatorInterface Injected validator service
+     */
     private $validator;
-    private $BUserService;
+
+    /**
+     * @var BUserService Injected user service
+     */
+    private $userService;
+
+    /**
+     * @var \Symfony\Component\Serializer\Serializer Generated serializer from constructor
+     */
     private $serializer;
 
     /**
@@ -38,14 +53,14 @@ class BUserController extends Controller
      *
      * @param APIService         $APIService   Injected API service
      * @param ValidatorInterface $validator    Injected Validator service
-     * @param BUserService       $BUserService Injected User service
+     * @param BUserService       $userService  Injected User service
      */
-    public function __construct(APIService $APIService, ValidatorInterface $validator, BUserService $BUserService)
+    public function __construct(APIService $APIService, ValidatorInterface $validator, BUserService $userService)
     {
         $this->apiService = $APIService;
         $this->validator = $validator;
-        $this->BUserService = $BUserService;
-        $this->serializer = $BUserService->generateSerializer();
+        $this->userService = $userService;
+        $this->serializer = $userService->generateSerializer();
     }
 
     /**
@@ -58,15 +73,15 @@ class BUserController extends Controller
      * @throws \LogicException
      * @throws APIException
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function create(Request $request): Response
+    public function create(Request $request): JsonResponse
     {
         if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
             throw $this->apiService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
         }
         $datas = $request->getContent();
-        $user = $this->BUserService->generateAppUserFromJSON($datas);
+        $user = $this->userService->generateAppUserFromJSON($datas);
         $validationErrors = $this->validator->validate($user);
         $user->eraseCredentials();
         if (\count($validationErrors) > 0) {
@@ -91,9 +106,9 @@ class BUserController extends Controller
      * @throws \LogicException
      * @throws APIException
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function patch(Request $request, string $id): Response
+    public function patch(Request $request, string $id): JsonResponse
     {
         if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
             throw $this->apiService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
@@ -106,7 +121,7 @@ class BUserController extends Controller
             throw $this->apiService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
         }
         $datas = $request->getContent();
-        $user = $this->BUserService->mergeEntityFromJSON($user, $datas);
+        $user = $this->userService->mergeEntityFromJSON($user, $datas);
         $validationErrors = $this->validator->validate($user);
         if (\count($validationErrors) > 0) {
             throw $this->apiService->postError($validationErrors);
@@ -130,7 +145,7 @@ class BUserController extends Controller
      *
      * @return JsonResponse
      */
-    public function details(Request $request, string $id): Response
+    public function details(Request $request, string $id): JsonResponse
     {
         if (!Uuid::isValid($id)) {
             throw $this->apiService->error(Response::HTTP_NOT_FOUND, APIError::INVALID_UUID_ERROR);
@@ -156,7 +171,7 @@ class BUserController extends Controller
      *
      * @return JsonResponse
      */
-    public function delete(Request $request, string $id): Response
+    public function delete(Request $request, string $id): JsonResponse
     {
         if (!Uuid::isValid($id)) {
             throw $this->apiService->error(Response::HTTP_NOT_FOUND, APIError::INVALID_UUID_ERROR);
@@ -183,7 +198,7 @@ class BUserController extends Controller
      *
      * @return JsonResponse
      */
-    public function detailsList(Request $request): Response
+    public function detailsList(Request $request): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(BUser::class);
@@ -201,7 +216,7 @@ class BUserController extends Controller
      *
      * @return JsonResponse
      */
-    public function login(Request $request): Response
+    public function login(Request $request): JsonResponse
     {
         return $this->apiService->successWithoutResults(self::LOGIN_RESULTS_FOR_IDENTIFIER, Response::HTTP_OK, $request);
     }
