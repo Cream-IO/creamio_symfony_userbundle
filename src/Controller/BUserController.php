@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class BUserController.
@@ -34,11 +33,6 @@ class BUserController extends Controller
     private $apiService;
 
     /**
-     * @var ValidatorInterface Injected validator service
-     */
-    private $validator;
-
-    /**
      * @var BUserService Injected user service
      */
     private $userService;
@@ -52,13 +46,11 @@ class BUserController extends Controller
      * BUserController constructor.
      *
      * @param APIService         $APIService   Injected API service
-     * @param ValidatorInterface $validator    Injected Validator service
      * @param BUserService       $userService  Injected User service
      */
-    public function __construct(APIService $APIService, ValidatorInterface $validator, BUserService $userService)
+    public function __construct(APIService $APIService, BUserService $userService)
     {
         $this->apiService = $APIService;
-        $this->validator = $validator;
         $this->userService = $userService;
         $this->serializer = $userService->generateSerializer();
     }
@@ -82,11 +74,8 @@ class BUserController extends Controller
         }
         $datas = $request->getContent();
         $user = $this->userService->generateAppUserFromJSON($datas);
-        $validationErrors = $this->validator->validate($user);
+        $this->apiService->validateEntity($user);
         $user->eraseCredentials();
-        if (\count($validationErrors) > 0) {
-            throw $this->apiService->postError($validationErrors);
-        }
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
@@ -122,10 +111,7 @@ class BUserController extends Controller
         }
         $datas = $request->getContent();
         $user = $this->userService->mergeEntityFromJSON($user, $datas);
-        $validationErrors = $this->validator->validate($user);
-        if (\count($validationErrors) > 0) {
-            throw $this->apiService->postError($validationErrors);
-        }
+        $this->apiService->validateEntity($user);
         $user->eraseCredentials();
         $this->getDoctrine()->getManager()->flush();
 
