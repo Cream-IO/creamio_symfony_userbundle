@@ -13,6 +13,8 @@ class CreamIOUserExtension extends Extension
      * @param array            $configs
      * @param ContainerBuilder $container
      *
+     * @codeCoverageIgnore
+     *
      * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
