@@ -41,19 +41,21 @@ Handle security by replacing (and adapt to your needs) `config/packages/security
 # config/packages/security.yaml
 security:
     providers:
+        api_token_user_provider:
+            id: cream_io_user.security.apitoken_user_provider
         db_provider:
             entity:
                 class: CreamIO\UserBundle\Entity\BUser
                 property: username
 
     role_hierarchy:
+        IS_AWAITING_VALIDATION: IS_AUTHENTICATED_ANONYMOUSLY
         ROLE_ADMIN:     IS_AWAITING_VALIDATION
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     access_control:
         - { path: /admin/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/api, roles: ROLE_ADMIN }
-        - { path: /securedTestRoute, roles: ROLE_ADMIN }
 
     firewalls:
         dev:
@@ -62,11 +64,11 @@ security:
 
         main:
             anonymous: ~
-            pattern: ^/
-            json_login:
-                check_path: cream_io_user.login
-            logout:
-                path:   /logout
+            pattern: ^/admin/api
+            stateless: true
+            simple_preauth:
+                authenticator: cream_io_user.security.apitoken_authenticator
+            provider: api_token_user_provider
 
     encoders:
         CreamIO\UserBundle\Entity\BUser:
@@ -113,10 +115,11 @@ Project tree
 └── src
     ├── Controller              # API routes controller
     ├── DependencyInjection
-    ├── Entity                  # BUser entity
-    ├── Repository              # BUser repository
+    ├── Entity                  # BUser & API Token entities
+    ├── Repository              # BUser & API Token repositories
     ├── Resources
     │   └── config              # Service declaration file
+    ├── Security                # API Token handling services
     └── Service                 # User management service
 ```
 
