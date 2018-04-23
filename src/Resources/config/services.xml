@@ -10,8 +10,20 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
         <service id="CreamIO\UserBundle\Service\BUserService" alias="cream_io_user.buserservice" />
+        <service id="cream_io_user.security.apitoken_authenticator" class="CreamIO\UserBundle\Security\APITokenAuthenticator">
+            <argument type="service" id="security.http_utils" />
+        </service>
+        <service id="CreamIO\UserBundle\Security\APITokenAuthenticator" alias="cream_io_user.security.apitoken_authenticator" />
+        <service id="cream_io_user.security.apitoken_user_provider" class="CreamIO\UserBundle\Security\APITokenUserProvider">
+            <argument type="service" id="CreamIO\UserBundle\Repository\APITokenRepository" />
+            <argument type="service" id="CreamIO\UserBundle\Repository\BUserRepository" />
+        </service>
         <!-- REPOSITORIES -->
         <service id="CreamIO\UserBundle\Repository\BUserRepository" public="false">
+            <tag name="doctrine.repository_service" />
+            <argument type="service" id="doctrine" />
+        </service>
+        <service id="CreamIO\UserBundle\Repository\APITokenRepository" public="false">
             <tag name="doctrine.repository_service" />
             <argument type="service" id="doctrine" />
         </service>
@@ -19,6 +31,7 @@
         <service id="cream_io_user.controller.buser_controller" class="CreamIO\UserBundle\Controller\BUserController" public="true">
             <argument type="service" id="cream_io_base.apiservice" />
             <argument type="service" id="cream_io_user.buserservice" />
+            <argument type="service" id="security.user_password_encoder.generic" />
         </service>
         <service id="CreamIO\UserBundle\Controller\BUserController" alias="cream_io_user.controller.buser_controller" public="true" />
     </services>
