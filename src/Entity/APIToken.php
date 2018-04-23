@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace CreamIO\UserBundle\Entity;
 
 use CreamIO\UserBundle\Entity\BUser;
 use Doctrine\ORM\Mapping as ORM;
