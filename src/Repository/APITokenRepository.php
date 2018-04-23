@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace CreamIO\UserBundle\Repository;
 
 use CreamIO\UserBundle\Entity\APIToken;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
