@@ -54,8 +54,9 @@ class BUserController extends Controller
     /**
      * BUserController constructor.
      *
-     * @param APIService         $APIService   Injected API service
-     * @param BUserService       $userService  Injected User service
+     * @param APIService                   $APIService      Injected API service
+     * @param BUserService                 $userService     Injected User service
+     * @param UserPasswordEncoderInterface $passwordEncoder Inject password encoder service
      */
     public function __construct(APIService $APIService, BUserService $userService, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -216,20 +217,20 @@ class BUserController extends Controller
     {
         $receivedContent = \json_decode($request->getContent(), true);
         if (null === $receivedContent) {
-            throw $this->apiService->error(Response::HTTP_BAD_REQUEST, 'Bad request content.');
+            throw $this->apiService->error(Response::HTTP_BAD_REQUEST, 'Bad request content.', ['technical' => 'Tried to login with empty content.']);
         }
         if ((false === \array_key_exists('username', $receivedContent)) || (false === \array_key_exists('password', $receivedContent))) {
-            throw $this->apiService->error(Response::HTTP_BAD_REQUEST, 'Bad request content.');
+            throw $this->apiService->error(Response::HTTP_BAD_REQUEST, 'Bad request content.', ['technical' => 'Tried to login with missing username or password.']);
         }
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository(BUser::class);
         $user = $userRepo->findOneByUsername($receivedContent['username']);
         if (null === $user) {
-            throw $this->apiService->error(Response::HTTP_UNAUTHORIZED, 'Bad credentials.');
+            throw $this->apiService->error(Response::HTTP_UNAUTHORIZED, 'Bad credentials.', ['technical' => sprintf('Tried to login with invalid username : %s.', $receivedContent['username'])]);
         }
         $isPasswordValid = $this->passwordEncoder->isPasswordValid($user, $receivedContent['password']);
         if (!$isPasswordValid) {
-            throw $this->apiService->error(Response::HTTP_UNAUTHORIZED, 'Bad credentials.');
+            throw $this->apiService->error(Response::HTTP_UNAUTHORIZED, 'Bad credentials.', ['technical' => 'Tried to login with invalid password.']);
         }
         $apiToken = new APIToken();
         $apiToken->setHash(base64_encode(random_bytes(50)));
