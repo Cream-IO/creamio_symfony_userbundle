@@ -225,7 +225,7 @@ class BUserController extends Controller
         $userRepo = $em->getRepository(BUser::class);
         $user = $userRepo->findOneByUsername($receivedContent['username']);
         if (null === $user) {
-            throw $this->apiService->error(Response::HTTP_NOT_FOUND, 'User does not exist.');
+            throw $this->apiService->error(Response::HTTP_UNAUTHORIZED, 'Bad credentials.');
         }
         $isPasswordValid = $this->passwordEncoder->isPasswordValid($user, $receivedContent['password']);
         if (!$isPasswordValid) {
